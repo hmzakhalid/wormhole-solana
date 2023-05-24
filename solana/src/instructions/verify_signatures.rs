@@ -1,3 +1,6 @@
+use serde_wormhole::{RawMessage, Error};
+use wormhole_sdk::vaa::{Vaa, Header, Body};
+
 use {
     super::Instruction,
     crate::{
@@ -21,10 +24,6 @@ use {
         sysvar,
     },
     std::io::Write,
-    wormhole::{
-        WormholeError,
-        VAA,
-    },
 };
 
 pub fn verify_signatures(
@@ -71,22 +70,23 @@ pub fn verify_signatures_txs(
     payer: Pubkey,
     guardian_set_index: u32,
     signature_set: Pubkey,
-) -> Result<Vec<Vec<SolanaInstruction>>, WormholeError> {
-    let vaa = VAA::from_bytes(vaa_data)?;
+) -> Result<Vec<Vec<SolanaInstruction>>, Error> {
+    let vaa :Vaa<&RawMessage> = serde_wormhole::from_slice(vaa_data)?;
 
     let mut signature_items: Vec<SignatureItem> = Vec::new();
     for s in vaa.signatures.iter() {
         let mut item = SignatureItem {
-            signature: s[1..].to_vec(),
+            signature: s.signature.to_vec(),
             key:       [0; 20],
-            index:     s[0] as u8,
+            index:     s.index, 
         };
-        item.key = guardian_set.keys[s[0] as usize];
+        item.key = guardian_set.keys[s.index as usize];
 
         signature_items.push(item);
     }
 
-    let vaa_hash = vaa.digest().unwrap().hash;
+    let (header, body) : (Header, Body<&RawMessage>) = vaa.into();
+    let vaa_hash = body.digest().unwrap().hash;
     let mut verify_txs: Vec<Vec<SolanaInstruction>> = Vec::new();
 
     for (_tx_index, chunk) in signature_items.chunks(7).enumerate() {
