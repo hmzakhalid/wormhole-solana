@@ -8,6 +8,7 @@
 
 mod accounts;
 mod message;
+mod error;
 
 // Re-export the entire instruction module as a namespace for functions that create wormhole
 // instructions for CPI.
@@ -28,4 +29,5 @@ pub use {
         post_message,
         Message,
     },
+    error::WormholeError
 };

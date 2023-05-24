@@ -10,11 +10,12 @@ use {
         account_info::AccountInfo,
         pubkey::Pubkey,
     },
-    wormhole::{
-        Chain,
-        WormholeError,
+    wormhole_sdk::{
+        Chain
     },
 };
+
+use borsh::maybestd::io::Result;
 
 #[derive(Debug, Eq, PartialEq, BorshSerialize, BorshDeserialize)]
 pub struct Claim {
@@ -43,7 +44,7 @@ impl Account for Claim {
         .0
     }
 
-    fn get(account: &AccountInfo) -> Result<Self, WormholeError> {
-        Claim::try_from_slice(&account.data.borrow()).map_err(|_| WormholeError::DeserializeFailed)
+    fn get(account: &AccountInfo) -> Result<Self> {
+        Claim::try_from_slice(&account.data.borrow())
     }
 }

@@ -3,7 +3,7 @@ use {
         account_info::AccountInfo,
         pubkey::Pubkey,
     },
-    wormhole::WormholeError,
+    borsh::maybestd::io::Result
 };
 
 mod claim;
@@ -33,5 +33,6 @@ pub trait Account: Sized {
     type Output;
 
     fn key(account: &Pubkey, seeds: Self::Seeds) -> Self::Output;
-    fn get(account: &AccountInfo) -> Result<Self, WormholeError>;
+    fn get(account: &AccountInfo) -> Result<Self>;
+
 }

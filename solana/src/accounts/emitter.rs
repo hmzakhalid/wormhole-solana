@@ -10,8 +10,10 @@ use {
         account_info::AccountInfo,
         pubkey::Pubkey,
     },
-    wormhole::WormholeError,
 };
+
+
+use borsh::maybestd::io::Result;
 
 #[derive(Debug, Eq, PartialEq, BorshSerialize, BorshDeserialize)]
 pub struct Emitter(u64);
@@ -26,7 +28,7 @@ impl Account for Emitter {
         (emitter, seeds.to_vec(), bump)
     }
 
-    fn get(account: &AccountInfo) -> Result<Self, WormholeError> {
+    fn get(account: &AccountInfo) -> Result<Self> {
         Ok(Emitter(account.lamports()))
     }
 }

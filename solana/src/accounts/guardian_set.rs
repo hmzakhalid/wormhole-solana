@@ -9,9 +9,10 @@ use {
     solana_program::{
         account_info::AccountInfo,
         pubkey::Pubkey,
-    },
-    wormhole::WormholeError,
+    }
 };
+
+use borsh::maybestd::io::Result;
 
 #[derive(Debug, Eq, PartialEq, BorshSerialize, BorshDeserialize)]
 pub struct GuardianSet {
@@ -33,8 +34,7 @@ impl Account for GuardianSet {
         Pubkey::find_program_address(&[b"GuardianSet", &index.to_be_bytes()], id).0
     }
 
-    fn get(account: &AccountInfo) -> Result<Self, WormholeError> {
+    fn get(account: &AccountInfo) -> Result<Self> {
         GuardianSet::try_from_slice(&account.data.borrow())
-            .map_err(|_| WormholeError::DeserializeFailed)
     }
 }

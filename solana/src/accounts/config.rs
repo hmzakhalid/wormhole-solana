@@ -10,9 +10,10 @@ use {
         account_info::AccountInfo,
         pubkey::Pubkey,
     },
-    wormhole::WormholeError,
 };
 
+
+use borsh::maybestd::io::Result;
 #[derive(Debug, Eq, PartialEq, BorshSerialize, BorshDeserialize)]
 pub struct Params {
     /// Period for how long a guardian set is valid after it has been replaced by a new one.
@@ -40,7 +41,7 @@ impl Account for Config {
         config
     }
 
-    fn get(account: &AccountInfo) -> Result<Self, WormholeError> {
-        Config::try_from_slice(&account.data.borrow()).map_err(|_| WormholeError::DeserializeFailed)
+    fn get(account: &AccountInfo) -> Result<Self> {
+        Config::try_from_slice(&account.data.borrow())
     }
 }

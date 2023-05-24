@@ -19,8 +19,9 @@ use {
         account_info::AccountInfo,
         pubkey::Pubkey,
     },
-    wormhole::WormholeError,
 };
+use borsh::maybestd::io::Result;
+
 
 #[derive(Debug, Eq, PartialEq, BorshSerialize, BorshDeserialize, Clone)]
 pub struct VAA {
@@ -55,7 +56,7 @@ impl Account for VAA {
         vaa
     }
 
-    fn get(account: &AccountInfo) -> Result<Self, WormholeError> {
-        VAA::try_from_slice(&account.data.borrow()).map_err(|_| WormholeError::DeserializeFailed)
+    fn get(account: &AccountInfo) -> Result<Self> {
+        VAA::try_from_slice(&account.data.borrow())
     }
 }

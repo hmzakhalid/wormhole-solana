@@ -10,8 +10,9 @@ use {
         account_info::AccountInfo,
         pubkey::Pubkey,
     },
-    wormhole::WormholeError,
 };
+
+use borsh::maybestd::io::Result;
 
 #[derive(Debug, Eq, PartialEq, BorshSerialize, BorshDeserialize)]
 pub struct FeeCollector(u64);
@@ -25,7 +26,7 @@ impl Account for FeeCollector {
         fee_collector
     }
 
-    fn get(account: &AccountInfo) -> Result<Self, WormholeError> {
+    fn get(account: &AccountInfo) -> Result<Self> {
         Ok(FeeCollector(account.lamports()))
     }
 }

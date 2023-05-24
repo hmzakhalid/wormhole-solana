@@ -9,9 +9,10 @@ use {
     solana_program::{
         account_info::AccountInfo,
         pubkey::Pubkey,
-    },
-    wormhole::WormholeError,
+    }
 };
+use borsh::maybestd::io::Result;
+
 
 #[derive(Debug, Eq, PartialEq, BorshSerialize, BorshDeserialize)]
 pub struct Sequence(u64);
@@ -24,7 +25,7 @@ impl Account for Sequence {
         Pubkey::find_program_address(&[b"Sequence", emitter.as_ref()], id).0
     }
 
-    fn get(account: &AccountInfo) -> Result<Self, WormholeError> {
+    fn get(account: &AccountInfo) -> Result<Self> {
         Ok(Sequence(account.lamports()))
     }
 }
