@@ -1,8 +1,0 @@
-/Users/gbescos/Documents/repos/wormhole-solana/solana/target/debug/deps/solana_config_program-6ceebef00b1fecbc.rmeta: /Users/gbescos/.cargo/registry/src/github.com-1ecc6299db9ec823/solana-config-program-1.10.31/src/lib.rs /Users/gbescos/.cargo/registry/src/github.com-1ecc6299db9ec823/solana-config-program-1.10.31/src/config_instruction.rs /Users/gbescos/.cargo/registry/src/github.com-1ecc6299db9ec823/solana-config-program-1.10.31/src/config_processor.rs /Users/gbescos/.cargo/registry/src/github.com-1ecc6299db9ec823/solana-config-program-1.10.31/src/date_instruction.rs
-
-/Users/gbescos/Documents/repos/wormhole-solana/solana/target/debug/deps/solana_config_program-6ceebef00b1fecbc.d: /Users/gbescos/.cargo/registry/src/github.com-1ecc6299db9ec823/solana-config-program-1.10.31/src/lib.rs /Users/gbescos/.cargo/registry/src/github.com-1ecc6299db9ec823/solana-config-program-1.10.31/src/config_instruction.rs /Users/gbescos/.cargo/registry/src/github.com-1ecc6299db9ec823/solana-config-program-1.10.31/src/config_processor.rs /Users/gbescos/.cargo/registry/src/github.com-1ecc6299db9ec823/solana-config-program-1.10.31/src/date_instruction.rs
-
-/Users/gbescos/.cargo/registry/src/github.com-1ecc6299db9ec823/solana-config-program-1.10.31/src/lib.rs:
-/Users/gbescos/.cargo/registry/src/github.com-1ecc6299db9ec823/solana-config-program-1.10.31/src/config_instruction.rs:
-/Users/gbescos/.cargo/registry/src/github.com-1ecc6299db9ec823/solana-config-program-1.10.31/src/config_processor.rs:
-/Users/gbescos/.cargo/registry/src/github.com-1ecc6299db9ec823/solana-config-program-1.10.31/src/date_instruction.rs:

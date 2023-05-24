@@ -34,17 +34,17 @@ CRATE_CC_NO_DEFAULTS = None
 DEBUG = Some("true")
 CARGO_CFG_TARGET_FEATURE = Some("aes,crc,dit,dotprod,dpb,dpb2,fcma,fhm,flagm,fp16,frintts,jsconv,lor,lse,neon,paca,pacg,pan,pmuv3,ras,rcpc,rcpc2,rdm,sb,sha2,sha3,ssbs,vh")
 running: "cc" "-O0" "-ffunction-sections" "-fdata-sections" "-fPIC" "-g" "-fno-omit-frame-pointer" "-arch" "arm64" "-I" "bzip2-1.0.8" "-D_FILE_OFFSET_BITS=64" "-DBZ_NO_STDIO" "-o" "/Users/gbescos/Documents/repos/wormhole-solana/solana/target/debug/build/bzip2-sys-f338bae5566f2546/out/lib/bzip2-1.0.8/blocksort.o" "-c" "bzip2-1.0.8/blocksort.c"
-exit status: 0
 running: "cc" "-O0" "-ffunction-sections" "-fdata-sections" "-fPIC" "-g" "-fno-omit-frame-pointer" "-arch" "arm64" "-I" "bzip2-1.0.8" "-D_FILE_OFFSET_BITS=64" "-DBZ_NO_STDIO" "-o" "/Users/gbescos/Documents/repos/wormhole-solana/solana/target/debug/build/bzip2-sys-f338bae5566f2546/out/lib/bzip2-1.0.8/huffman.o" "-c" "bzip2-1.0.8/huffman.c"
 exit status: 0
-running: "cc" "-O0" "-ffunction-sections" "-fdata-sections" "-fPIC" "-g" "-fno-omit-frame-pointer" "-arch" "arm64" "-I" "bzip2-1.0.8" "-D_FILE_OFFSET_BITS=64" "-DBZ_NO_STDIO" "-o" "/Users/gbescos/Documents/repos/wormhole-solana/solana/target/debug/build/bzip2-sys-f338bae5566f2546/out/lib/bzip2-1.0.8/randtable.o" "-c" "bzip2-1.0.8/randtable.c"
+exit status: 0
 running: "cc" "-O0" "-ffunction-sections" "-fdata-sections" "-fPIC" "-g" "-fno-omit-frame-pointer" "-arch" "arm64" "-I" "bzip2-1.0.8" "-D_FILE_OFFSET_BITS=64" "-DBZ_NO_STDIO" "-o" "/Users/gbescos/Documents/repos/wormhole-solana/solana/target/debug/build/bzip2-sys-f338bae5566f2546/out/lib/bzip2-1.0.8/crctable.o" "-c" "bzip2-1.0.8/crctable.c"
+exit status: 0
+running: "cc" "-O0" "-ffunction-sections" "-fdata-sections" "-fPIC" "-g" "-fno-omit-frame-pointer" "-arch" "arm64" "-I" "bzip2-1.0.8" "-D_FILE_OFFSET_BITS=64" "-DBZ_NO_STDIO" "-o" "/Users/gbescos/Documents/repos/wormhole-solana/solana/target/debug/build/bzip2-sys-f338bae5566f2546/out/lib/bzip2-1.0.8/randtable.o" "-c" "bzip2-1.0.8/randtable.c"
+exit status: 0
 running: "cc" "-O0" "-ffunction-sections" "-fdata-sections" "-fPIC" "-g" "-fno-omit-frame-pointer" "-arch" "arm64" "-I" "bzip2-1.0.8" "-D_FILE_OFFSET_BITS=64" "-DBZ_NO_STDIO" "-o" "/Users/gbescos/Documents/repos/wormhole-solana/solana/target/debug/build/bzip2-sys-f338bae5566f2546/out/lib/bzip2-1.0.8/compress.o" "-c" "bzip2-1.0.8/compress.c"
 exit status: 0
 running: "cc" "-O0" "-ffunction-sections" "-fdata-sections" "-fPIC" "-g" "-fno-omit-frame-pointer" "-arch" "arm64" "-I" "bzip2-1.0.8" "-D_FILE_OFFSET_BITS=64" "-DBZ_NO_STDIO" "-o" "/Users/gbescos/Documents/repos/wormhole-solana/solana/target/debug/build/bzip2-sys-f338bae5566f2546/out/lib/bzip2-1.0.8/decompress.o" "-c" "bzip2-1.0.8/decompress.c"
-exit status: 0
 running: "cc" "-O0" "-ffunction-sections" "-fdata-sections" "-fPIC" "-g" "-fno-omit-frame-pointer" "-arch" "arm64" "-I" "bzip2-1.0.8" "-D_FILE_OFFSET_BITS=64" "-DBZ_NO_STDIO" "-o" "/Users/gbescos/Documents/repos/wormhole-solana/solana/target/debug/build/bzip2-sys-f338bae5566f2546/out/lib/bzip2-1.0.8/bzlib.o" "-c" "bzip2-1.0.8/bzlib.c"
-exit status: 0
 exit status: 0
 exit status: 0
 AR_aarch64-apple-darwin = None
