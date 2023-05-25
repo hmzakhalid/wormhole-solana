@@ -25,7 +25,6 @@ use {
         Cursor,
         Write,
     },
-    wormhole::WormholeError,
 };
 
 #[derive(Debug, Eq, PartialEq, BorshSerialize)]
@@ -68,7 +67,7 @@ pub fn post_vaa(
     payer: Pubkey,
     signature_set: Pubkey,
     post_vaa_data: PostVAAData,
-) -> Result<SolanaInstruction, WormholeError> {
+) -> Result<SolanaInstruction, serde_wormhole::Error> {
     let bridge = Config::key(&wormhole, ());
     let guardian_set = GuardianSet::key(&wormhole, post_vaa_data.guardian_set_index);
     let vaa = VAA::key(&wormhole, post_vaa_data.hash());

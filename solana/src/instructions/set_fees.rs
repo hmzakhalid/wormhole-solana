@@ -16,9 +16,8 @@ use {
         },
         pubkey::Pubkey,
     },
-    wormhole::{
+    wormhole_sdk::{
         Chain,
-        WormholeError,
     },
 };
 
@@ -31,7 +30,7 @@ pub fn set_fees(
     message: Pubkey,
     emitter: Pubkey,
     sequence: u64,
-) -> Result<SolanaInstruction, WormholeError> {
+) -> Result<SolanaInstruction, serde_wormhole::Error> {
     let bridge = Config::key(&wormhole, ());
     let claim = Claim::key(
         &wormhole,
@@ -51,6 +50,6 @@ pub fn set_fees(
             AccountMeta::new(claim, false),
             AccountMeta::new_readonly(solana_program::system_program::id(), false),
         ],
-        data:       (Instruction::SetFees, SetFeesData {}).try_to_vec().unwrap(),
+        data:       (Instruction::SetFees, SetFeesData {}).try_to_vec()?,
     })
 }

@@ -14,9 +14,10 @@ use {
         },
         pubkey::Pubkey,
         sysvar,
-    },
-    wormhole::WormholeError,
+    }
 };
+// use borsh::maybestd::io::Result;
+
 
 #[derive(BorshSerialize, Default)]
 pub struct InitializeData {
@@ -38,7 +39,7 @@ pub fn initialize(
     fee: u64,
     guardian_set_expiration_time: u32,
     initial_guardians: &[[u8; 20]],
-) -> Result<SolanaInstruction, WormholeError> {
+) -> Result<SolanaInstruction, serde_wormhole::Error> {
     let bridge = Config::key(&wormhole, ());
     let guardian_set = GuardianSet::key(&wormhole, 0);
     let fee_collector = FeeCollector::key(&wormhole, ());
@@ -62,6 +63,6 @@ pub fn initialize(
                 guardian_set_expiration_time,
             },
         )
-            .try_to_vec()?,
+            .try_to_vec()?, 
     })
 }

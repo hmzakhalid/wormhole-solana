@@ -15,7 +15,6 @@ use {
         pubkey::Pubkey,
         sysvar,
     },
-    wormhole::WormholeError,
 };
 
 #[derive(Debug, PartialEq, BorshSerialize)]
@@ -33,7 +32,7 @@ pub fn post_message(
     nonce: u32,
     payload: &[u8],
     consistency_level: u8,
-) -> Result<SolanaInstruction, WormholeError> {
+) -> Result<SolanaInstruction, serde_wormhole::Error> {
     let bridge = Config::key(&wormhole, ());
     let fee_collector = FeeCollector::key(&wormhole, ());
     let sequence = Sequence::key(&wormhole, emitter);
@@ -71,7 +70,7 @@ pub fn post_message_unreliable(
     nonce: u32,
     payload: &[u8],
     consistency_level: u8,
-) -> Result<SolanaInstruction, WormholeError> {
+) -> Result<SolanaInstruction, serde_wormhole::Error> {
     let bridge = Config::key(&program_id, ());
     let fee_collector = FeeCollector::key(&program_id, ());
     let sequence = Sequence::key(&program_id, emitter);

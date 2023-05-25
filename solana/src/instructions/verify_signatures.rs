@@ -1,4 +1,4 @@
-use serde_wormhole::{RawMessage, Error};
+use serde_wormhole::{RawMessage};
 use wormhole_sdk::vaa::{Vaa, Header, Body};
 
 use {
@@ -32,7 +32,7 @@ pub fn verify_signatures(
     guardian_set_index: u32,
     signature_set: Pubkey,
     data: VerifySignaturesData,
-) -> Result<SolanaInstruction, WormholeError> {
+) -> Result<SolanaInstruction, serde_wormhole::Error> {
     let guardian_set = GuardianSet::key(&program_id, guardian_set_index);
 
     Ok(SolanaInstruction {
@@ -70,7 +70,7 @@ pub fn verify_signatures_txs(
     payer: Pubkey,
     guardian_set_index: u32,
     signature_set: Pubkey,
-) -> Result<Vec<Vec<SolanaInstruction>>, Error> {
+) -> Result<Vec<Vec<SolanaInstruction>>, serde_wormhole::Error> {
     let vaa :Vaa<&RawMessage> = serde_wormhole::from_slice(vaa_data)?;
 
     let mut signature_items: Vec<SignatureItem> = Vec::new();
@@ -85,7 +85,7 @@ pub fn verify_signatures_txs(
         signature_items.push(item);
     }
 
-    let (header, body) : (Header, Body<&RawMessage>) = vaa.into();
+    let (_, body) : (Header, Body<&RawMessage>) = vaa.into();
     let vaa_hash = body.digest().unwrap().hash;
     let mut verify_txs: Vec<Vec<SolanaInstruction>> = Vec::new();
 
@@ -97,36 +97,36 @@ pub fn verify_signatures_txs(
         let message_offset = data_offset + chunk.len() * 85;
 
         // 1 number of signatures
-        secp_payload.write_u8(chunk.len() as u8).unwrap();
+        secp_payload.write_u8(chunk.len() as u8)?;
 
         // Secp signature info description (11 bytes * n)
         for (i, s) in chunk.iter().enumerate() {
             secp_payload
                 .write_u16::<LittleEndian>((data_offset + 85 * i) as u16)
-                .unwrap();
-            secp_payload.write_u8(0).unwrap();
+                ?;
+            secp_payload.write_u8(0)?;
             secp_payload
                 .write_u16::<LittleEndian>((data_offset + 85 * i + 65) as u16)
-                .unwrap();
-            secp_payload.write_u8(0).unwrap();
+                ?;
+            secp_payload.write_u8(0)?;
             secp_payload
                 .write_u16::<LittleEndian>(message_offset as u16)
-                .unwrap();
+                ?;
             secp_payload
                 .write_u16::<LittleEndian>(vaa_hash.len() as u16)
-                .unwrap();
-            secp_payload.write_u8(0).unwrap();
+                ?;
+            secp_payload.write_u8(0)?;
             signature_status[s.index as usize] = i as i8;
         }
 
         // Write signatures and addresses
         for s in chunk.iter() {
-            secp_payload.write(&s.signature).unwrap();
-            secp_payload.write(&s.key).unwrap();
+            secp_payload.write(&s.signature)?;
+            secp_payload.write(&s.key)?;
         }
 
         // Write body
-        secp_payload.write(&vaa_hash).unwrap();
+        secp_payload.write(&vaa_hash)?;
 
         let secp_ix = SolanaInstruction {
             program_id: solana_program::secp256k1_program::id(),
