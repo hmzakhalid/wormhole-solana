@@ -7,8 +7,8 @@
 #![deny(warnings)]
 
 mod accounts;
-mod message;
 mod error;
+mod message;
 
 // Re-export the entire instruction module as a namespace for functions that create wormhole
 // instructions for CPI.
@@ -25,9 +25,9 @@ pub use {
         Sequence,
         VAA,
     },
+    error::WormholeError,
     message::{
         post_message,
         Message,
     },
-    error::WormholeError
 };

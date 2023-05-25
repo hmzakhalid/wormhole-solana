@@ -3,6 +3,7 @@
 use {
     super::Account,
     borsh::{
+        maybestd::io::Result,
         BorshDeserialize,
         BorshSerialize,
     },
@@ -11,9 +12,6 @@ use {
         pubkey::Pubkey,
     },
 };
-
-
-use borsh::maybestd::io::Result;
 #[derive(Debug, Eq, PartialEq, BorshSerialize, BorshDeserialize)]
 pub struct Params {
     /// Period for how long a guardian set is valid after it has been replaced by a new one.

@@ -3,16 +3,15 @@
 use {
     super::Account,
     borsh::{
+        maybestd::io::Result,
         BorshDeserialize,
         BorshSerialize,
     },
     solana_program::{
         account_info::AccountInfo,
         pubkey::Pubkey,
-    }
+    },
 };
-
-use borsh::maybestd::io::Result;
 
 #[derive(Debug, Eq, PartialEq, BorshSerialize, BorshDeserialize)]
 pub struct GuardianSet {

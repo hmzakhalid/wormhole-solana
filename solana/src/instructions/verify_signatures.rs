@@ -1,6 +1,3 @@
-use serde_wormhole::{RawMessage};
-use wormhole_sdk::vaa::{Vaa, Header, Body};
-
 use {
     super::Instruction,
     crate::{
@@ -15,6 +12,7 @@ use {
         LittleEndian,
         WriteBytesExt,
     },
+    serde_wormhole::RawMessage,
     solana_program::{
         instruction::{
             AccountMeta,
@@ -24,6 +22,11 @@ use {
         sysvar,
     },
     std::io::Write,
+    wormhole_sdk::vaa::{
+        Body,
+        Header,
+        Vaa,
+    },
 };
 
 pub fn verify_signatures(
@@ -71,21 +74,21 @@ pub fn verify_signatures_txs(
     guardian_set_index: u32,
     signature_set: Pubkey,
 ) -> Result<Vec<Vec<SolanaInstruction>>, serde_wormhole::Error> {
-    let vaa :Vaa<&RawMessage> = serde_wormhole::from_slice(vaa_data)?;
+    let vaa: Vaa<&RawMessage> = serde_wormhole::from_slice(vaa_data)?;
 
     let mut signature_items: Vec<SignatureItem> = Vec::new();
     for s in vaa.signatures.iter() {
         let mut item = SignatureItem {
             signature: s.signature.to_vec(),
             key:       [0; 20],
-            index:     s.index, 
+            index:     s.index,
         };
         item.key = guardian_set.keys[s.index as usize];
 
         signature_items.push(item);
     }
 
-    let (_, body) : (Header, Body<&RawMessage>) = vaa.into();
+    let (_, body): (Header, Body<&RawMessage>) = vaa.into();
     let vaa_hash = body.digest().unwrap().hash;
     let mut verify_txs: Vec<Vec<SolanaInstruction>> = Vec::new();
 
@@ -101,20 +104,12 @@ pub fn verify_signatures_txs(
 
         // Secp signature info description (11 bytes * n)
         for (i, s) in chunk.iter().enumerate() {
-            secp_payload
-                .write_u16::<LittleEndian>((data_offset + 85 * i) as u16)
-                ?;
+            secp_payload.write_u16::<LittleEndian>((data_offset + 85 * i) as u16)?;
             secp_payload.write_u8(0)?;
-            secp_payload
-                .write_u16::<LittleEndian>((data_offset + 85 * i + 65) as u16)
-                ?;
+            secp_payload.write_u16::<LittleEndian>((data_offset + 85 * i + 65) as u16)?;
             secp_payload.write_u8(0)?;
-            secp_payload
-                .write_u16::<LittleEndian>(message_offset as u16)
-                ?;
-            secp_payload
-                .write_u16::<LittleEndian>(vaa_hash.len() as u16)
-                ?;
+            secp_payload.write_u16::<LittleEndian>(message_offset as u16)?;
+            secp_payload.write_u16::<LittleEndian>(vaa_hash.len() as u16)?;
             secp_payload.write_u8(0)?;
             signature_status[s.index as usize] = i as i8;
         }

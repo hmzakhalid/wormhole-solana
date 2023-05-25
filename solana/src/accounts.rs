@@ -1,9 +1,9 @@
 use {
+    borsh::maybestd::io::Result,
     solana_program::{
         account_info::AccountInfo,
         pubkey::Pubkey,
     },
-    borsh::maybestd::io::Result
 };
 
 mod claim;
@@ -34,5 +34,4 @@ pub trait Account: Sized {
 
     fn key(account: &Pubkey, seeds: Self::Seeds) -> Self::Output;
     fn get(account: &AccountInfo) -> Result<Self>;
-
 }

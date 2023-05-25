@@ -14,7 +14,7 @@ use {
         },
         pubkey::Pubkey,
         sysvar,
-    }
+    },
 };
 // use borsh::maybestd::io::Result;
 
@@ -63,6 +63,6 @@ pub fn initialize(
                 guardian_set_expiration_time,
             },
         )
-            .try_to_vec()?, 
+            .try_to_vec()?,
     })
 }

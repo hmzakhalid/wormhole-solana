@@ -3,6 +3,7 @@
 use {
     super::Account,
     borsh::{
+        maybestd::io::Result,
         BorshDeserialize,
         BorshSerialize,
     },
@@ -10,12 +11,8 @@ use {
         account_info::AccountInfo,
         pubkey::Pubkey,
     },
-    wormhole_sdk::{
-        Chain
-    },
+    wormhole_sdk::Chain,
 };
-
-use borsh::maybestd::io::Result;
 
 #[derive(Debug, Eq, PartialEq, BorshSerialize, BorshDeserialize)]
 pub struct Claim {

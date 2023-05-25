@@ -16,9 +16,7 @@ use {
         },
         pubkey::Pubkey,
     },
-    wormhole_sdk::{
-        Chain,
-    },
+    wormhole_sdk::Chain,
 };
 
 #[derive(Debug, Eq, PartialEq, BorshSerialize)]

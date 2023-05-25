@@ -12,6 +12,7 @@
 use {
     super::Account,
     borsh::{
+        maybestd::io::Result,
         BorshDeserialize,
         BorshSerialize,
     },
@@ -20,7 +21,6 @@ use {
         pubkey::Pubkey,
     },
 };
-use borsh::maybestd::io::Result;
 
 
 #[derive(Debug, Eq, PartialEq, BorshSerialize, BorshDeserialize, Clone)]
