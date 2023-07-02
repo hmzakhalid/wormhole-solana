@@ -22,8 +22,8 @@ solana-program  = "1.10.29"
 
 nom             = { version="7", default-features=false, features=["alloc"] }
 primitive-types = { version="0.11", default-features=false }
-wormhole-sdk = { git = "https://github.com/wormhole-foundation/wormhole", tag = "v2.17.1" }
-serde_wormhole = { git = "https://github.com/wormhole-foundation/wormhole", tag = "v2.17.1"}
+wormhole-sdk = { git = "https://github.com/wormhole-foundation/wormhole", tag = "v2.18.7" }
+serde_wormhole = { git = "https://github.com/wormhole-foundation/wormhole", tag = "v2.18.7"}
 
 [dev-dependencies]
 solana-program         = "1.10.29"
@@ -32,4 +32,4 @@ solana-sdk             = "1.10.29"
 tokio                  = "1.14.1"
 
 [patch.crates-io]
-serde_wormhole = { git = "https://github.com/wormhole-foundation/wormhole", tag = "v2.17.1" }
+serde_wormhole = { git = "https://github.com/wormhole-foundation/wormhole", tag = "v2.18.7" }
